@@ -15,6 +15,7 @@ class QuestionAdmin(admin.ModelAdmin):
 
     fieldsets = [
         (None,               {'fields': ['question_text']}),
+        ('Story',               {'fields': ['story']}),
         ('Date information', {'fields': ['pub_date'], 'classes': ['collapse']}),
     ]
     inlines = [OptionInline]
