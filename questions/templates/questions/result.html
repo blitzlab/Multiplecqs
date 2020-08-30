@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<div class="head-div" style="height:70vh;">
+  <h1 class="result-head">See your result below</h1>
+  <h6 class="instructions-note">You got {{ correct }} answers right out of {{ total }} questions</h6>
+  <h4>Your Score <span>{{ percentagescore }}%</span></h4>
+  {% if passed is True %}
+    <h6 class="instructions-note">Congratulations! You passed the test</h6>
+  {% else %}
+    <h6 class="instructions-note">You scored below the average pass mark</h6>
+  {% endif %}
+</div>
+<div class="continue-div">
+  <a class="continue" href="{% url 'questions:thankyou' %}">Close</a>
+</div>
+
+{% endblock body %}

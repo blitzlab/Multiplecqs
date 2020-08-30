@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<form class="challenge" action="{% url 'questions:proccess_result' %}" method="post">
+  <h1 style="text-align:center;">Your Timer</h1>
+  <h1 id="timer" style="text-align:center;"></h1>
+  {% csrf_token %}
+  <div class="questions">
+
+      {% if questions %}
+        {% for question in questions %}
+        <p class="question"><span class="serialno">{{ forloop.counter }}.</span>{{ question }}</p>
+        {% for option in question.options.all %}
+
+        <p><input type="radio" name="{{ question.id }}" value="{{ option }}"> &nbsp; {{ option }}</p>
+        {% endfor %}
+        {% endfor %}
+      {% endif %}
+
+  </div>
+  <div class="continue-div" style="margin-bottom:50px;">
+    <button class="continue" href="{% url 'questions:instructions' %}">Submit Test</button>
+  </div>
+</form>
+
+<script>
+  // Set duration for challenge
+  var durationOfChallenge = 1;
+
+  // Get question object
+  var questionObj = document.querySelector(".challenge");
+
+  //Get continue button
+  var continueBtn = document.querySelector(".continue");
+  // Set the date we're counting down to
+  var countDownDate = new Date().getTime() + durationOfChallenge * 60000;
+
+  // Update the count down every 1 second
+  var x = setInterval(function() {
+
+    // Get today's date and time
+    var now = new Date().getTime();
+
+    // Find the distance between now and the count down date
+    var distance = countDownDate - now;
+
+    // Time calculations for hours, minutes and seconds
+    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    // Display the result in the element with id="timer"
+    document.getElementById("timer").innerHTML = hours + ":"
+    + minutes + ":" + seconds;
+
+    // If the count down is finished, write some text
+    if (distance < 0) {
+      clearInterval(x);
+      document.getElementById("timer").innerHTML = "TIME UP";
+      alert("Your time is up")
+      questionObj.submit()
+      continueBtn.disabled = true;
+
+    }
+  }, 1000);
+</script>
+{% endblock body %}

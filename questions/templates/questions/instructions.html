@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<div class="instructions-div" style="height:70vh">
+  <h1 class="instructions-head">Instructions</h1>
+  <ol>
+    <p class="instructions">Befor you begin the challenge</p>
+    <li>Make sure you have good internet connection</li>
+    <li>If you are taking the challenge late in the day, it is recommended that you reboot your computer to free up some space</li>
+    <li>Shut down all instant messaging tools to avoid distraction</li>
+    <li>Make sure you have read all the instructions before you proceed to the challenge</li>
+    <p class="instructions">During the challenge</p>
+    <li>You have 5 minutes to complete the challenge</li>
+    <li>Only select the right option from the options available to you</li>
+    <li>Make sure you complete the challege time is up or your test will be authomatically submitted</li>
+    <li>Make sure you understand the story before attempting any question</li>
+    <li>When you have completed all the challenges, click on submit button to submit your test and view your result</li>
+    <li>Best of luck!</li>
+  </ol>
+</div>
+<div class="continue-div">
+  <a class="continue" href="{% url 'questions:question_list' %}">Start Challenge</a>
+</div>
+
+{% endblock body %}
