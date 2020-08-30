@@ -8,7 +8,7 @@
   <div class="questions">
       {% if questions and story is not none %}
         <h4>Story</h4>
-        <p>{{ story.text }}</p>
+        <p>{{ story.text|safe }}</p>
         <h4>Questions</h4>
         {% for question in questions %}
         <p class="question"><span class="serialno">{{ forloop.counter }}.</span>{{ question }}</p>
