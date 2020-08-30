@@ -1,6 +1,7 @@
 from django.shortcuts import render
-from .models import Question, Option
+from .models import Question, Option, Story
 from django.views.generic import ListView
+from django.shortcuts import get_object_or_404
 
 # Create your views here.
 class QuestionsList(ListView):
@@ -8,6 +9,11 @@ class QuestionsList(ListView):
     # paginate_by = 4
     context_object_name = 'questions'
     template_name = "questions/questions.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["story"] = get_object_or_404(Story, pk=1)
+        return context
 
 def proccess_result(request):
     if request.method == "POST" or None:
