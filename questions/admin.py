@@ -14,8 +14,8 @@ class QuestionAdmin(admin.ModelAdmin):
     filter_horizontal = ()
 
     fieldsets = [
-        (None,               {'fields': ['question_text']}),
         ('Story',               {'fields': ['story']}),
+        (None,               {'fields': ['question_text']}),
         ('Date information', {'fields': ['pub_date'], 'classes': ['collapse']}),
     ]
     inlines = [OptionInline]
